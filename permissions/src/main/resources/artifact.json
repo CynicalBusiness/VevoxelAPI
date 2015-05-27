@@ -1,0 +1,7 @@
+{
+  "main": "io.vevox.vevoxel.permissions.VevoxelPermissions",
+  "name": "VevoxelAPI Permissions",
+  "version": "1.0.0",
+  "dependencies": [],
+  "load": "startup"
+}

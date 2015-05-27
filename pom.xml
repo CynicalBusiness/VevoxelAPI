@@ -17,6 +17,7 @@
     <version>${project.version}</version>
     <modules>
         <module>core</module>
+        <module>permissions</module>
     </modules>
 
     <distributionManagement>
