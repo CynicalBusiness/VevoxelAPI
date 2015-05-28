@@ -1,7 +1,11 @@
 {
   "main": "io.vevox.vevoxel.permissions.VevoxelPermissions",
-  "name": "VevoxelAPI Permissions",
+  "name": "VevoxelAPI-Permissions",
   "version": "1.0.0",
   "dependencies": [],
-  "load": "startup"
+  "load": "startup",
+  "meta": {
+    "prefix": "V-PERM",
+    "description": "A vevoxel official artifact for permission handling."
+  }
 }

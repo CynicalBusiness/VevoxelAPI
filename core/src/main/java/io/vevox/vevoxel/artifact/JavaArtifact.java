@@ -1,6 +1,9 @@
 package io.vevox.vevoxel.artifact;
 
 import com.avaje.ebean.EbeanServer;
+import io.vevox.vevoxel.io.DataHandler;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -11,6 +14,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,9 +28,16 @@ public class JavaArtifact implements Artifact, Plugin {
 
     }
 
+
+
     @Override
     public File getDataFolder() {
-        return null;
+        return new File(DataHandler.getDataDirectory(), getDataName());
+    }
+
+    @Override
+    public File getResourceFolder() {
+        return new File(DataHandler.getResourceDirectory(), getDataName());
     }
 
     @Override
@@ -41,7 +52,7 @@ public class JavaArtifact implements Artifact, Plugin {
 
     @Override
     public InputStream getResource(String s) {
-        return null;
+        return getClass().getResourceAsStream(s);
     }
 
     @Override
@@ -56,7 +67,15 @@ public class JavaArtifact implements Artifact, Plugin {
 
     @Override
     public void saveResource(String s, boolean b) {
-
+        File target = new File(getResourceFolder(), s);
+        if (target.exists() && b && !target.delete())
+            throw new RuntimeException(new IOException("Failed to delete old resource " + s));
+        if (!target.exists())
+            try {
+                FileUtils.copyURLToFile(getClass().getResource(s), target, 5, 5);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
     }
 
     @Override
@@ -131,6 +150,11 @@ public class JavaArtifact implements Artifact, Plugin {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+        return null;
+    }
+
+    @Override
+    public ArtifactInfo getInfo() {
         return null;
     }
 }
