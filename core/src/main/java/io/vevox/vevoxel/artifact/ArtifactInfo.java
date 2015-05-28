@@ -2,6 +2,7 @@ package io.vevox.vevoxel.artifact;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.bukkit.plugin.PluginDescriptionFile;
 
 import java.util.Arrays;
 
@@ -157,6 +158,10 @@ public class ArtifactInfo {
                 throw new UnknownDependencyException(i);
             }
         }
+    }
+
+    public PluginDescriptionFile asPluginDescription(){
+        return new PluginDescriptionFile(name, version, main.getName());
     }
 
 }

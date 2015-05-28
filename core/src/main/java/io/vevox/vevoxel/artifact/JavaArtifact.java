@@ -3,7 +3,7 @@ package io.vevox.vevoxel.artifact;
 import com.avaje.ebean.EbeanServer;
 import io.vevox.vevoxel.io.DataHandler;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -90,7 +90,7 @@ public class JavaArtifact implements Artifact, Plugin {
 
     @Override
     public Server getServer() {
-        return null;
+        return Bukkit.getServer();
     }
 
     @Override
